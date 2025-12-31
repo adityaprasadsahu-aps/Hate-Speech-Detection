@@ -1,0 +1,41 @@
+pipeline = Pipeline([
+    ('tfidf', TfidfVectorizer(max_features=5000, stop_words='english', ngram_range=(1, 2))),
+    ('clf', RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1))
+])
+
+
+This creates a machine learning pipeline using scikit-learn’s Pipeline class. 
+A pipeline chains multiple processing steps together so they can be applied consistently during both training and prediction.
+
+Why use a Pipeline?
+Avoids data leakage: Ensures the same preprocessing is applied to training and new data.
+Cleaner code: No need to manually apply vectorization then prediction.
+Enables cross-validation: You can tune and validate the whole process as one unit.
+Step-by-Step Explanation
+1. ('tfidf', TfidfVectorizer(...)) -> Text -> Numbers
+This is the first step: converting raw text (tweets) into numerical features.
+
+TfidfVectorizer:
+Converts text into a matrix of TF-IDF (Term Frequency–Inverse Document Frequency) features.
+TF-IDF gives higher weight to words that are frequent in a document but rare across the whole dataset -> useful for highlighting meaningful terms.
+Parameters:
+max_features=5000: Only keep the top 5,000 most important words (by TF-IDF score). This reduces dimensionality and speeds up training.
+
+stop_words='english': Automatically removes common English words like "the", "and", "is", which usually don’t help with classification.
+
+ngram_range=(1, 2): Uses both single words (unigrams) and pairs of consecutive words (bigrams).
+Example: For "I hate spam", it considers: "I", "hate", "spam", "I hate", "hate spam".
+ Output: A sparse matrix of shape (n_samples, up to 5000 features).
+
+2. ('clf', RandomForestClassifier(...)) -> Numbers → Prediction
+This is the second step: the actual machine learning model that makes predictions.
+
+RandomForestClassifier: An ensemble of decision trees that reduces overfitting and improves accuracy.
+Parameters:
+n_estimators=100: Build 100 decision trees and average their predictions.
+random_state=42: Makes results reproducible (same output every time you run it).
+n_jobs=-1: Use all available CPU cores for faster training.
+ Input: The TF-IDF feature matrix from step 1.
+ Output: Predicted class labels (0, 1, or 2 in your hate speech dataset).
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hate Speech Detection System</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> Hate Speech Detector</h1>
+            <p>Analyze text content to detect hate speech, offensive language, or neutral content</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <h2>Enter Text to Analyze</h2>
+                <div class="text-input-container">
+                    <textarea id="textInput" placeholder="Type or paste your text here... Minimum 10 characters."></textarea>
+                    <div class="char-count">
+                        <span id="charCount">0</span> characters
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn analyze-btn" id="analyzeBtn" disabled>
+                        <i class="fas fa-search"></i> Analyze Text
+                    </button>
+                    <button class="btn clear-btn" id="clearBtn">
+                        <i class="fas fa-eraser"></i> Clear
+                    </button>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing text...</p>
+            </div>
+            
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h2>Analysis Results</h2>
+                
+                <div class="result-card">
+                    <div class="classification">
+                        <h3>Classification</h3>
+                        <div class="class-badge" id="classBadge">Class 0</div>
+                    </div>
+                    
+                    <div class="confidence">
+                        <h4>Confidence</h4>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill" style="width: 0%"></div>
+                        </div>
+                        <div class="confidence-value" id="confidenceValue">0%</div>
+                    </div>
+                    
+                    <div class="details">
+                        <h4>Class Information</h4>
+                        <div class="class-info" id="classInfo">
+                            <div class="info-item">
+                                <h5>Class 0: Hate Speech</h5>
+                                <p>Attacks based on race, religion, gender, etc.</p>
+                            </div>
+                            <div class="info-item">
+                                <h5>Class 1: Offensive Language</h5>
+                                <p>Insulting or inappropriate content</p>
+                            </div>
+                            <div class="info-item">
+                                <h5>Class 2: Neither</h5>
+                                <p>Normal, non-offensive content</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by Machine Learning | 
+                <a href="#" id="modelInfoBtn">Model Info</a> | 
+                <a href="#" id="testBtn">Test Connection</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
